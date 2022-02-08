@@ -7,12 +7,15 @@ const clearEl = document.getElementById("clear");
 const ctx = canvas.getContext("2d");
 const eraser = document.getElementById("eraser");
 const draw = document.getElementById("draw");
+const toolbox = document.querySelector(".toolbox");
+const state = document.querySelector(".state");
 
 let size = 30;
 let isPressed = false;
 let color = "black";
 let x = undefined;
 let y = undefined;
+let drOREr = true;
 
 const mouseDown = function (e) {
   isPressed = true;
@@ -46,22 +49,25 @@ canvas.addEventListener("mousemove", mouseMove);
 
 // eraser function. Firstly clear the drawing feature then apply erase function
 eraser.addEventListener("click", function (e) {
+  drOREr = false;
   canvas.removeEventListener("mousemove", mouseMove);
   canvas.addEventListener("mousemove", eraseDraw);
+  stateInd();
 });
 // draw function
 draw.addEventListener("click", function (e) {
+  drOREr = true;
+  canvas.removeEventListener("mousemove", eraseDraw);
   canvas.addEventListener("mousemove", mouseMove);
+  stateInd();
 });
 
 const eraseDraw = function (e) {
   if (isPressed) {
     const x2 = e.offsetX;
     const y2 = e.offsetY;
-    console.log(x2, y2);
     ctx.clearRect(x2, y2, size, size);
   }
-  // ctx.clearRect(x, y, x2 - x, y2 - y);
 };
 
 const drawCircle = function (x, y) {
@@ -78,6 +84,13 @@ const drawLine = function (x1, y1, x2, y2) {
   ctx.strokeStyle = color;
   ctx.lineWidth = size * 2;
   ctx.stroke();
+};
+//indicate whether drawing or erasing
+const stateInd = function () {
+  let exp;
+  drOREr ? (exp = "Drawing") : (exp = "Erasing");
+  state.innerHTML = exp;
+  state.style.color = color;
 };
 
 increaseBtn.addEventListener("click", () => {
@@ -102,8 +115,11 @@ decreaseBtn.addEventListener("click", () => {
 
 colorEl.addEventListener("change", (e) => {
   color = e.target.value;
+  console.log(color);
 });
 
 function updateSizeOnScreen() {
   sizeEl.innerText = size;
 }
+
+stateInd();

@@ -43,3 +43,7 @@ canvas {
 .toolbox > *:last-child {
   margin-left: auto;
 }
+
+.state {
+  width: 7rem;
+}
