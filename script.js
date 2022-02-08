@@ -55,10 +55,13 @@ draw.addEventListener("click", function (e) {
 });
 
 const eraseDraw = function (e) {
-  const x2 = e.offsetX;
-  const y2 = e.offsetY;
-  console.log(x2, y2);
-  ctx.clearRect(x, y, x2 - x, y2 - y);
+  if (isPressed) {
+    const x2 = e.offsetX;
+    const y2 = e.offsetY;
+    console.log(x2, y2);
+    ctx.clearRect(x2, y2, size, size);
+  }
+  // ctx.clearRect(x, y, x2 - x, y2 - y);
 };
 
 const drawCircle = function (x, y) {
@@ -99,10 +102,6 @@ decreaseBtn.addEventListener("click", () => {
 
 colorEl.addEventListener("change", (e) => {
   color = e.target.value;
-});
-
-clearEl.addEventListener("click", () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 function updateSizeOnScreen() {
