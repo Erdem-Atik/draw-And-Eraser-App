@@ -89,9 +89,15 @@ const drawLine = function (x1, y1, x2, y2) {
 const stateInd = function () {
   let exp;
   drOREr ? (exp = "Drawing") : (exp = "Erasing");
+  console.log(exp);
   state.innerHTML = exp;
-  state.style.color = color;
 };
+
+stateInd();
+
+colorEl.addEventListener("change", (e) => {
+  color = e.target.value;
+});
 
 increaseBtn.addEventListener("click", () => {
   size += 5;
@@ -113,13 +119,6 @@ decreaseBtn.addEventListener("click", () => {
   updateSizeOnScreen();
 });
 
-colorEl.addEventListener("change", (e) => {
-  color = e.target.value;
-  console.log(color);
-});
-
 function updateSizeOnScreen() {
   sizeEl.innerText = size;
 }
-
-stateInd();
