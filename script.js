@@ -9,7 +9,7 @@ const eraser = document.getElementById("eraser");
 const draw = document.getElementById("draw");
 const toolbox = document.querySelector(".toolbox");
 const state = document.querySelector(".state");
-
+//test
 let size = 30;
 let isPressed = false;
 let color = "black";
