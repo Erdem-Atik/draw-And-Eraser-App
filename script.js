@@ -124,3 +124,5 @@ decreaseBtn.addEventListener("click", () => {
 function updateSizeOnScreen() {
   sizeEl.innerText = size;
 }
+
+//test
